@@ -1,0 +1,32 @@
+{
+  "name": "react-native-amazon-authentication",
+  "version": "0.0.2",
+  "description": "Amazon user login module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akhilesh-mourya/react-native-amazon-authentication.git"
+  },
+  "keywords": [
+    "amazon-login",
+    "amazon-auth",
+    "login",
+    "authentication",
+    "amazon",
+    "react-native-amazon-auth",
+    "react-native-amazon-login"
+  ],
+  "author": "Akhilesh Mourya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/akhilesh-mourya/react-native-amazon-authentication/issues"
+  },
+  "homepage": "https://github.com/akhilesh-mourya/react-native-amazon-authentication#readme",
+  "files": [
+    "ios",
+    "react-native-amazon-authentication.podspec"
+    ]
+}

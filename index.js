@@ -1,7 +1,7 @@
 
 import { NativeModules } from 'react-native';
 
-const { RNLoginWithAmazon } = NativeModules;
-const LoginWithAmazon = RNLoginWithAmazon
+const { RNAmazonAuthentication } = NativeModules;
+const LoginWithAmazon = RNAmazonAuthentication
 
 export default LoginWithAmazon;

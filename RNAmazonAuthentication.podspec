@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.homepage       = package['homepage']
   s.platform       = :ios, '10.0'
   s.source         = { :git => '[https://github.com/akhilesh-mourya/react-native-amazon-authentication.git]', :branch => 'master' }
-  s.source_files   = "ios/RNAmazonAuthentication/*.{h,m}"
+  s.source_files   = "ios/**/*"
   s.dependency "React"
 
 end

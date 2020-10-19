@@ -296,9 +296,7 @@ PODS:
     - React-Core (= 0.63.3)
     - React-cxxreact (= 0.63.3)
     - React-jsi (= 0.63.3)
-  - RNAmazonAuthentication (0.0.9):
-    - React
-  - RNLoginWithAmazon (1.0.0):
+  - RNAmazonAuthentication (0.1.0):
     - React
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -352,7 +350,6 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - RNAmazonAuthentication (from `../node_modules/react-native-amazon-authentication`)
-  - RNLoginWithAmazon (from `../node_modules/react-native-login-with-amazon`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -423,8 +420,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNAmazonAuthentication:
     :path: "../node_modules/react-native-amazon-authentication"
-  RNLoginWithAmazon:
-    :path: "../node_modules/react-native-login-with-amazon"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -465,11 +460,10 @@ SPEC CHECKSUMS:
   React-RCTText: 65a6de06a7389098ce24340d1d3556015c38f746
   React-RCTVibration: 8e9fb25724a0805107fc1acc9075e26f814df454
   ReactCommon: 4167844018c9ed375cc01a843e9ee564399e53c3
-  RNAmazonAuthentication: 1025ef13db51cea20ede5a753f568f451b4ce8f2
-  RNLoginWithAmazon: 27ed545a16963d4e7416a89d1e265214eba2bc56
+  RNAmazonAuthentication: 42a4a3fa14fb8e9b562df5d4dc16f143b276cde4
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: d4655d5974148ebc7e969c3e2b1e659de2a38265
+PODFILE CHECKSUM: c5495de840a080195f9315fdc1a865920c1cb461
 
 COCOAPODS: 1.9.3

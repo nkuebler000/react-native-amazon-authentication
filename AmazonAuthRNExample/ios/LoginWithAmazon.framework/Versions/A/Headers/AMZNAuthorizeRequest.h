@@ -15,8 +15,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- These constants define interactive stratgies used in executing an authorization reuest.
- Interactive strategy defnies whether to switch UI for re-authentication when calling for authorize:handler API. LWA SDK for iOS supports fllowing three types of interactive strategyes:
+ These constants define interactive strategies used in executing an authorization request.
+ Interactive strategy determines how to interact with the user when a call is made to the authorize:withHandler: API. LWA SDK for iOS supports the following three types of interactive strategies:
  
  @since v3.0
  */

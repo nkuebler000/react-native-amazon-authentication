@@ -68,6 +68,8 @@ static void InitializeFlipper(UIApplication *application) {
 }
 
 -(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+  NSString *sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+
   // Pass on the url to the SDK to parse authorization code from the url.
   BOOL isValidRedirectLogInURL = [AMZNAuthorizationManager handleOpenURL:url sourceApplication:sourceApplication];
   

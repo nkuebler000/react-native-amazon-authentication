@@ -8,86 +8,95 @@
 
 import LoginWithAmazon from 'react-native-amazon-authentication';
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
   TouchableOpacity,
   StatusBar,
+  ActivityIndicator,
+  Image
 } from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import AmazonLoginImg from './assets/amazon_login.png';
 
 const App: () => React$Node = () => {
+  const [isLoggedIn, setLoginState] = useState(false);
+  const [isLogInPressed, setLoginPressState] = useState(false);
+
+  const [userProfileData, setUserProfileData] = useState({});
+
+
+  useEffect(
+    () => {
+      LoginWithAmazon.checkIsUserSignedIn((error, accessToken, profileData) => {
+        if(!error) {
+          setLoginState(true)
+          setUserProfileData(profileData)
+        }
+      })
+    },
+  );
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          <View>
-            <TouchableOpacity onPress={()=> {
-              LoginWithAmazon.login((error, accessToken, profileData) => {
-
-              })
-            }}> 
-              <Text>Amazon Login</Text>
+      <SafeAreaView style={styles.container}>
+            {!isLoggedIn && <View style={styles.innerContainer}>
+              <TouchableOpacity onPress={()=> {
+                setLoginPressState(true)
+                LoginWithAmazon.login((error, accessToken, profileData) => {
+                  setLoginPressState(false)
+                  if(!error) {
+                    setLoginState(true)
+                    setUserProfileData(profileData)
+                  }
+                })
+              }}> 
+                <Image source={AmazonLoginImg}/>
             </TouchableOpacity>
-          </View>
-        </ScrollView>
+            {isLogInPressed && <ActivityIndicator style={styles.topmargin}/>}
+            </View>}
+            {isLoggedIn && <View style={styles.innerContainer}>
+            <Text style={styles.textLbl}>{userProfileData.name}</Text>
+            <Text style={styles.textLbl}>{userProfileData.email}</Text>
+
+              <TouchableOpacity style={styles.topmargin} onPress={()=> {
+                LoginWithAmazon.logout((error) => {
+                  if(!error) {
+                    setLoginState(false)
+                    setUserProfileData({})
+                  }
+                })
+              }}> 
+                <Text style={styles.textLbl}>Logout</Text>
+            </TouchableOpacity>
+            </View>}
       </SafeAreaView>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 200
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  innerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  body: {
-    backgroundColor: Colors.white,
+  textLbl: {
+    fontSize: 16,
+    marginTop: 5,
+    fontWeight: 'bold'
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+  topmargin: {
+    marginTop: 20
+  }
 });
 
 export default App;

@@ -20,6 +20,18 @@ target 'AmazonAuthRNExample' do
   use_flipper!
   post_install do |installer|
     flipper_post_install(installer)
+    
+    installer.pods_project.targets.each do |target|
+      # find the right target
+      if target.name == 'RNAmazonAuthentication'
+        target.build_configurations.each do |config|
+          # add library search paths
+          config.build_settings['FRAMEWORK_SEARCH_PATHS'] = ["$(PROJECT_DIR)/.."]
+
+        end
+      end
+    end
+    
   end
 end
 

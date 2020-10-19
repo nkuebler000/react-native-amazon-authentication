@@ -88,6 +88,11 @@ RCT_EXPORT_METHOD(fetchUserData:(RCTResponseSenderBlock)callback)
 // Logs the user out
 RCT_EXPORT_METHOD(logout:(RCTResponseSenderBlock)callback)
 {
+    [self logoutAmazon:callback];
+    [self logoutAmazon:callback];
+}
+
+- (void)logoutAmazon:(RCTResponseSenderBlock)callback {
     [[AMZNAuthorizationManager sharedManager] signOut:^(NSError * _Nullable error) {
         if (error) {
             callback(@[[error userInfo]]);
@@ -96,6 +101,5 @@ RCT_EXPORT_METHOD(logout:(RCTResponseSenderBlock)callback)
         }
     }];
 }
-
 
 @end

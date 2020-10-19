@@ -29,36 +29,37 @@ For React Native 0.60 and above, run the following command
 OR
 
 `cd ios`
+
 `pod install`
 
 For React Native 0.59 and below
 
-Run react-native link react-native-amazon-authentication to link the react-native-amazon-authentication library.
+Run `react-native link react-native-amazon-authentication` to link the react-native-amazon-authentication library.
 
 
 ### A. Get amazon authentication API key
 If you don't have an amazon developer account yet then create one from [here](https://developer.amazon.com/)
 
-After creating and login your accound do the following steps:
+After creating and login your amazon developer account, do the following:
 
 1. You will first have to create a Security Profile to get your amazon iOS APIKey. Go [here](https://developer.amazon.com/settings/console/securityprofile/overview.html) and create one.
 2. Go inside your Security Profile and select `iOS Settings` tab.
-3. Add an API key there. You will be asked for key name and your iOS app bundle identifier.
-4. After adding an API key, you will get an amazon API key there. Copy it.
+3. Click on a button `Add an API key` there. You will be asked for key name and your iOS app bundle identifier.
+4. After adding an API key, you will get your iOS amazon API key there. Copy it.
 
 ### B. Add amazon authentication API key to your app plist
 Create a new key `APIKey` with type string in your iOS app plist file and paste the amazon api key there.
 
 ### C. Add a URL Scheme to your app plist
-Go to your app info plist file in XCode. Click on + button under URL Types in plist file. You will be asked to enter your app bundle identifier and URL Schemes. The URL scheme must be declared as amzn-<bundleID> (for example, amzn-com.example.app).
+Go to your app info plist file in XCode. Click on + button under URL Types in plist file. You will be asked to enter your app bundle identifier and URL Schemes. The URL scheme must be declared as amzn-bundleID (for example, amzn-com.example.app).
 
 If you have any doubt in the above steps then follow the document [here](https://developer.amazon.com/docs/login-with-amazon/create-ios-project.html#add-api-key) for more details.
 
 ### D. Add amazon login framework(SDK) in your app
-You can find amazon login framework in the github repo. Download it and keep it inside ios folder of your react native app. Go to `Build Phases` section in your XCode and check LoginWithAmazon.framework is showing there or not under `Link Binary With Libraries`. If not then add it. Also add `Security.framework` and `SafariServices.framework` there.
+You can find LoginWithAmazon.framework in the github repo. Download it and keep it inside ios folder of your react native app. Go to `Build Phases` section in your XCode and check LoginWithAmazon.framework is showing there or not under `Link Binary With Libraries`. If not then add it. Also add `Security.framework` and `SafariServices.framework` there.
 
 ### E. Update your podfile
-To add Framework Search Path under `RNAmazonAuthentication` pod you need to update your Podfile. Add the following code under section `post_install do |installer|` in your Podfile:
+To add Framework Search Path under `RNAmazonAuthentication` pod, you need to update your Podfile. Add the following code under section `post_install do |installer|` in your Podfile:
 
 ```
 installer.pods_project.targets.each do |target|
@@ -95,7 +96,7 @@ In AppDelegate.m file of your iOS app, add the following import and method:
 }
 ```
 
-Now you have setup your iOS app with this node-module.
+Now you have setup your iOS app with this node-module completely.
 
 
 # Usage

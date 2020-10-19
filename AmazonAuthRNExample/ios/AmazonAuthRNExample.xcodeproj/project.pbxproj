@@ -17,6 +17,8 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* AmazonAuthRNExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AmazonAuthRNExampleTests.m */; };
 		31295038253C99BA00312887 /* LoginWithAmazon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31295037253C99BA00312887 /* LoginWithAmazon.framework */; };
+		31B45742253DB8AB00FA9FA6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B45741253DB8AB00FA9FA6 /* Security.framework */; };
+		31B45744253DB8B300FA9FA6 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B45743253DB8B300FA9FA6 /* SafariServices.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8DEC10876DF3DDA74E16B3D5 /* libPods-AmazonAuthRNExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B83D79992189BB410A225C97 /* libPods-AmazonAuthRNExample.a */; };
 		AA3B11473AB2152E1291C3D0 /* libPods-AmazonAuthRNExample-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C45DE5DC39C06AE8E389222 /* libPods-AmazonAuthRNExample-tvOS.a */; };
@@ -57,6 +59,8 @@
 		2D02E4901E0B4A5D006451C7 /* AmazonAuthRNExample-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AmazonAuthRNExample-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F7A58260E2876E28D0103C6 /* Pods-AmazonAuthRNExample-AmazonAuthRNExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmazonAuthRNExample-AmazonAuthRNExampleTests.release.xcconfig"; path = "Target Support Files/Pods-AmazonAuthRNExample-AmazonAuthRNExampleTests/Pods-AmazonAuthRNExample-AmazonAuthRNExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		31295037253C99BA00312887 /* LoginWithAmazon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LoginWithAmazon.framework; sourceTree = "<group>"; };
+		31B45741253DB8AB00FA9FA6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		31B45743253DB8B300FA9FA6 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		401621A9BF106D59B32FEDB7 /* Pods-AmazonAuthRNExample-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmazonAuthRNExample-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-AmazonAuthRNExample-tvOSTests/Pods-AmazonAuthRNExample-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		4AA9A90BD9BCCFB1EB82892B /* Pods-AmazonAuthRNExample-AmazonAuthRNExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmazonAuthRNExample-AmazonAuthRNExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-AmazonAuthRNExample-AmazonAuthRNExampleTests/Pods-AmazonAuthRNExample-AmazonAuthRNExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4C238BE248C6E7AE5F5AA23D /* Pods-AmazonAuthRNExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AmazonAuthRNExample.debug.xcconfig"; path = "Target Support Files/Pods-AmazonAuthRNExample/Pods-AmazonAuthRNExample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +88,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31B45744253DB8B300FA9FA6 /* SafariServices.framework in Frameworks */,
+				31B45742253DB8AB00FA9FA6 /* Security.framework in Frameworks */,
 				31295038253C99BA00312887 /* LoginWithAmazon.framework in Frameworks */,
 				8DEC10876DF3DDA74E16B3D5 /* libPods-AmazonAuthRNExample.a in Frameworks */,
 			);
@@ -142,6 +148,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				31B45743253DB8B300FA9FA6 /* SafariServices.framework */,
+				31B45741253DB8AB00FA9FA6 /* Security.framework */,
 				31295037253C99BA00312887 /* LoginWithAmazon.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,

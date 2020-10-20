@@ -17,27 +17,34 @@ import {
   TouchableOpacity,
   StatusBar,
   ActivityIndicator,
-  Image
+  Image,
+  NativeEventEmitter
 } from 'react-native';
 import AmazonLoginImg from './assets/amazon_login.png';
 
 const App: () => React$Node = () => {
   const [isLoggedIn, setLoginState] = useState(false);
   const [isLogInPressed, setLoginPressState] = useState(false);
-
   const [userProfileData, setUserProfileData] = useState({});
-
+  const eventEmitter = new NativeEventEmitter(LoginWithAmazon);
 
   useEffect(
     () => {
-      LoginWithAmazon.checkIsUserSignedIn((error, accessToken, profileData) => {
-        if(!error) {
+      this.eventListener = eventEmitter.addListener('AmazonAuthEvent', (params) => {
+        setLoginPressState(false)
+        if(!params.error) {
           setLoginState(true)
-          setUserProfileData(profileData)
+          setUserProfileData(params)
         }
-      })
+     });
+
+      LoginWithAmazon.checkIsUserSignedIn();
+
+      return () => {
+        this.eventListener.remove(); 
+      }
     },
-  );
+  []);
 
   return (
     <>
@@ -46,17 +53,11 @@ const App: () => React$Node = () => {
             {!isLoggedIn && <View style={styles.innerContainer}>
               <TouchableOpacity onPress={()=> {
                 setLoginPressState(true)
-                LoginWithAmazon.login((error, accessToken, profileData) => {
-                  setLoginPressState(false)
-                  if(!error) {
-                    setLoginState(true)
-                    setUserProfileData(profileData)
-                  }
-                })
+                LoginWithAmazon.login()
               }}> 
                 <Image source={AmazonLoginImg}/>
             </TouchableOpacity>
-            {isLogInPressed && <ActivityIndicator style={styles.topmargin}/>}
+            {isLogInPressed && <ActivityIndicator color={'blue'} size="large" style={styles.topmargin}/>}
             </View>}
             {isLoggedIn && <View style={styles.innerContainer}>
             <Text style={styles.textLbl}>{userProfileData.name}</Text>

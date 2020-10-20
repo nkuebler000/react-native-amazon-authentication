@@ -1,4 +1,4 @@
-package com.sampleapp;
+package com.amazonapp;
 
 
 import java.util.Arrays;

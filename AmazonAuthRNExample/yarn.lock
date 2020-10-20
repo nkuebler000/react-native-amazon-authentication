@@ -5477,10 +5477,10 @@ react-is@^16.12.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-native-amazon-authentication@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-amazon-authentication/-/react-native-amazon-authentication-0.1.0.tgz#f49ed956cab65d44014b3b6388521690c6469a1b"
-  integrity sha512-cmqGekWW5Ov6mdOLnALeJj2afwtXU+FGYm/CWtXXgBeczwFn4PjIIy8z8k0fDKTeTv4q+VJVt7t/wJHsES3aWw==
+react-native-amazon-authentication@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-amazon-authentication/-/react-native-amazon-authentication-0.6.0.tgz#6521c9ee12c5117b2dba8dee7cc37b9222fb1eaa"
+  integrity sha512-VoEIDe1NZBaIacCGjzexz3RFJ+5YT+zK3Gs3OtiFvf6f/oZEYWD27nYBgTBKWzX+u15UGQFIip8q3OmVhkOjFg==
 
 react-native@0.63.3:
   version "0.63.3"

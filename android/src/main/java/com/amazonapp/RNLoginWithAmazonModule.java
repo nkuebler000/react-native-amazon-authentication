@@ -1,10 +1,6 @@
-package com.sampleapp;
+package com.amazonapp;
 
-import android.app.Activity;
-import android.telecom.Call;
-import android.util.Log;
-import android.view.Gravity;
-import android.widget.Toast;
+import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
@@ -19,6 +15,9 @@ import com.amazon.identity.auth.device.api.Listener;
 import com.amazon.identity.auth.device.AuthError;
 import com.amazon.identity.auth.device.api.authorization.AuthorizationManager;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.Arguments;
 
 public class RNLoginWithAmazonModule extends ReactContextBaseJavaModule implements LifecycleEventListener {
 
@@ -51,7 +50,7 @@ public class RNLoginWithAmazonModule extends ReactContextBaseJavaModule implemen
     }
 
     @ReactMethod
-    public void login(final Callback callback) {
+    public void login() {
         this.requestContext.registerListener(new AuthorizeListener() {
 
             /* Authorization was completed successfully. */
@@ -62,22 +61,28 @@ public class RNLoginWithAmazonModule extends ReactContextBaseJavaModule implemen
                 userInfo.putString("email", result.getUser().getUserEmail());
                 userInfo.putString("name", result.getUser().getUserName());
                 userInfo.putString("user_id", result.getUser().getUserId());
-                callback.invoke(null, result.getAccessToken(), userInfo);
-            }
+                userInfo.putString("postalCode", result.getUser().getUserPostalCode());
+                userInfo.putString("token", result.getAccessToken());
+
+                sendEvent(reactContext, "AmazonAuthEvent", userInfo);            }
 
             /* There was an error during the attempt to authorize the
             application. */
             @Override
             public void onError(AuthError ae) {
                 /* Inform the user of the error */
-                callback.invoke(ae.toString());
+                WritableMap error = Arguments.createMap();
+                error.putString("error", ae.toString());
+                sendEvent(reactContext, "AmazonAuthEvent", error);
             }
 
             /* Authorization was cancelled before it could be completed. */
             @Override
             public void onCancel(AuthCancellation cancellation) {
                 /* Reset the UI to a ready-to-login state */
-                callback.invoke("The user cancelled the operation.");
+                WritableMap error = Arguments.createMap();
+                error.putString("error", "The user cancelled the operation.");
+                sendEvent(reactContext, "AmazonAuthEvent", error);
             }
         });
 
@@ -89,7 +94,7 @@ public class RNLoginWithAmazonModule extends ReactContextBaseJavaModule implemen
     }
 
     @ReactMethod
-    public void checkIsUserSignedIn(final Callback callback) {
+    public void checkIsUserSignedIn() {
         Scope[] scopes = {
                 ProfileScope.profile(),
                 ProfileScope.postalCode()
@@ -105,30 +110,37 @@ public class RNLoginWithAmazonModule extends ReactContextBaseJavaModule implemen
                         /* fetch completed successfully. */
                         @Override
                         public void onSuccess(User user) {
-                            final String name = user.getUserName();
                             WritableMap userInfo = Arguments.createMap();
                             userInfo.putString("email", user.getUserEmail());
                             userInfo.putString("name", user.getUserName());
                             userInfo.putString("user_id", user.getUserId());
-                            callback.invoke(null,result.getAccessToken(), userInfo);
+                            userInfo.putString("postalCode", user.getUserPostalCode());
+                            userInfo.putString("token", result.getAccessToken());
+
+                            sendEvent(reactContext, "AmazonAuthEvent", userInfo);
                         }
 
                         /* There was an error during the attempt to get the profile. */
                         @Override
                         public void onError(AuthError ae) {
-                            callback.invoke("User not signed in");
+
+                            WritableMap error = Arguments.createMap();
+                            error.putString("error", "User not signed in");
+                            sendEvent(reactContext, "AmazonAuthEvent", error);
                         }
                     });
                 } else {
-                    callback.invoke("User not signed in");
-                }
+                    WritableMap error = Arguments.createMap();
+                    error.putString("error", "User not signed in");
+                    sendEvent(reactContext, "AmazonAuthEvent", error);                }
             }
 
             @Override
             public void onError(AuthError ae) {
                 /* The user is not signed in */
-                callback.invoke("User not signed in");
-            }
+                WritableMap error = Arguments.createMap();
+                error.putString("error", "User not signed in");
+                sendEvent(reactContext, "AmazonAuthEvent", error);            }
         });
     }
 
@@ -147,5 +159,13 @@ public class RNLoginWithAmazonModule extends ReactContextBaseJavaModule implemen
                 callback.invoke(authError.toString());
             }
         });
+    }
+
+    private void sendEvent(ReactContext reactContext,
+                           String eventName,
+                           @Nullable WritableMap params) {
+        reactContext
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(eventName, params);
     }
 }

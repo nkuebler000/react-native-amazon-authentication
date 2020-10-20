@@ -14,9 +14,15 @@
 
 RCT_EXPORT_MODULE()
 
+
+- (NSArray<NSString *> *)supportedEvents
+{
+  return @[@"AmazonAuthEvent"];
+}
+
 // Called when the user taps the Login with Amazon Button
 // Redirects to the Amazon sign on page
-RCT_EXPORT_METHOD(login:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(login)
 {
     
     // Build an authorize request.
@@ -30,20 +36,29 @@ RCT_EXPORT_METHOD(login:(RCTResponseSenderBlock)callback)
                                             withHandler:^(AMZNAuthorizeResult *result, BOOL
                                                           userDidCancel, NSError *error) {
                                                 if (error) {
-                                                    callback(@[[error userInfo]]);
+                                                    [self sendEventWithName:@"AmazonAuthEvent" body:@{@"error": [error userInfo]}];
                                                 } else if (userDidCancel) {
-                                                    callback(@[@"User cancelled login with amazon"]);
+                                                    [self sendEventWithName:@"AmazonAuthEvent" body:@{@"error": @"User cancelled login with amazon"}];
                                                 } else {
                                                     // Authentication was successful.
                                                     // Obtain the access token and user profile data.
                                                     NSString *accessToken = result.token;
                                                     AMZNUser *user = result.user;
-                                                    callback(@[[NSNull null], accessToken, user.profileData]);
+                                                    
+                                                     [self sendEventWithName:@"AmazonAuthEvent" body:
+                                                          @{
+                                                              @"email": user.profileData[@"email"],
+                                                              @"name": user.profileData[@"name"],
+                                                              @"user_id": user.profileData[@"userID"],
+                                                              @"postalCode": user.profileData[@"postalCode"],
+                                                              @"token": accessToken
+                                                          }
+                                                     ];
                                                 }
                                             }];
 }
 
-RCT_EXPORT_METHOD(checkIsUserSignedIn:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(checkIsUserSignedIn) {
     // Make authorize call to SDK using AMZNInteractiveStrategyNever to detect whether there is an authenticated user. While making this call you can specify scopes for which user authorization is needed. If this call returns error, it means either there is no authenticated user, or at least of the requested scopes are not authorized. In both case you should show sign in page again.
     
     // Build an authorize request.
@@ -60,15 +75,23 @@ RCT_EXPORT_METHOD(checkIsUserSignedIn:(RCTResponseSenderBlock)callback) {
                                             withHandler:^(AMZNAuthorizeResult *result, BOOL
                                                           userDidCancel, NSError *error) {
                                                 if (error) {
-                                                    callback(@[[error userInfo]]);
+                                                    [self sendEventWithName:@"AmazonAuthEvent" body:@{@"error": [error userInfo]}];
                                                 } else if (userDidCancel) {
-                                                    callback(@[@"User cancelled login with amazon"]);
+                                                    [self sendEventWithName:@"AmazonAuthEvent" body:@{@"error": @"User not signed in"}];
                                                 } else {
                                                     // Authentication was successful.
                                                     // Obtain the access token and user profile data.
                                                     NSString *accessToken = result.token;
                                                     AMZNUser *user = result.user;
-                                                    callback(@[[NSNull null], accessToken, user.profileData]);
+                                                    [self sendEventWithName:@"AmazonAuthEvent" body:
+                                                         @{
+                                                             @"email": user.profileData[@"email"],
+                                                             @"name": user.profileData[@"name"],
+                                                             @"user_id": user.profileData[@"userID"],
+                                                             @"postalCode": user.profileData[@"postalCode"],
+                                                             @"token": accessToken
+                                                         }
+                                                    ];
                                                 }
                                             }];
 }

@@ -31,7 +31,6 @@ const App: () => React$Node = () => {
   useEffect(
     () => {
       this.eventListener = eventEmitter.addListener('AmazonAuthEvent', (params) => {
-        console.log('slkfjaslkfjaslfj', params)
         setLoginPressState(false)
         if(!params.error) {
           setLoginState(true)

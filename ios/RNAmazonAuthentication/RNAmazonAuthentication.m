@@ -44,16 +44,18 @@ RCT_EXPORT_METHOD(login)
                                                     // Obtain the access token and user profile data.
                                                     NSString *accessToken = result.token;
                                                     AMZNUser *user = result.user;
-                                                    
-                                                     [self sendEventWithName:@"AmazonAuthEvent" body:
-                                                          @{
-                                                              @"email": user.profileData[@"email"],
-                                                              @"name": user.profileData[@"name"],
-                                                              @"user_id": user.profileData[@"userID"],
-                                                              @"postalCode": user.profileData[@"postalCode"],
-                                                              @"token": accessToken
-                                                          }
-                                                     ];
+                                                    NSString *userID = user.profileData[@"userID"] ? user.profileData[@"userID"] : @"";
+                                                    NSString *postalCode = user.profileData[@"postalCode"] ? user.profileData[@"postalCode"] : @"";
+
+                                                    [self sendEventWithName:@"AmazonAuthEvent" body:
+                                                         @{
+                                                             @"email": user.profileData[@"email"],
+                                                             @"name": user.profileData[@"name"],
+                                                             @"user_id": userID,
+                                                             @"postalCode": postalCode,
+                                                             @"token": accessToken
+                                                         }
+                                                    ];
                                                 }
                                             }];
 }
@@ -83,12 +85,15 @@ RCT_EXPORT_METHOD(checkIsUserSignedIn) {
                                                     // Obtain the access token and user profile data.
                                                     NSString *accessToken = result.token;
                                                     AMZNUser *user = result.user;
+                                                    NSString *userID = user.profileData[@"userID"] ? user.profileData[@"userID"] : @"";
+                                                    NSString *postalCode = user.profileData[@"postalCode"] ? user.profileData[@"postalCode"] : @"";
+
                                                     [self sendEventWithName:@"AmazonAuthEvent" body:
                                                          @{
                                                              @"email": user.profileData[@"email"],
                                                              @"name": user.profileData[@"name"],
-                                                             @"user_id": user.profileData[@"userID"],
-                                                             @"postalCode": user.profileData[@"postalCode"],
+                                                             @"user_id": userID,
+                                                             @"postalCode": postalCode,
                                                              @"token": accessToken
                                                          }
                                                     ];

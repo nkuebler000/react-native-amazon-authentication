@@ -129,10 +129,10 @@ Now, do the following:
 
 ### B. Add amazon authentication API key in a txt file for your android app
   a. Create an `assets` folder inside `main` folder:
-    rn-app-root-folder -> android -> app -> src -> main
+    `rn-app-root-folder -> android -> app -> src -> main`
 
   b. Create a txt file with name `api_key.txt` inside:
-    rn-app-root-folder -> android -> app -> src -> main -> assets
+    `rn-app-root-folder -> android -> app -> src -> main -> assets`
   
   c. Paste your android API Key inside file `api_key.txt`
 
@@ -219,6 +219,14 @@ This module has an example react native project in github. Just do the following
 3. Run `npx pod-install`
 4. Change your amazon `APIKey` in the plist file
 5. Run your iOS RN app from XCode or terminal
+
+
+### Android
+1. Download it from github repo
+2. Run `yarn install` from the root directory
+4. Change your amazon `APIKey` inside `api_key.txt` file under path:
+  `rn-app-root-folder -> android -> app -> src -> main -> assets -> api_key.txt`
+5. Run your android RN app from Android Studio or terminal
 
 
 # License

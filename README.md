@@ -117,21 +117,27 @@ Now, do the following:
 
   a. Generate Debug Signature
     Inside the android folder in your react native app you will find an app folder there. Go inside the app folder and then you will find the `debug.keystore` file. Run the following command on your terminal:
+
     `keytool -list -v -keystore <your debug.keystore path> -alias androiddebugkey -storepass android -keypass android`
+    
     Now you will get the MD5 and SHA256 signatures.
 
   b. Generate Release Signature
     When you will create a sined apk then you will also create a jks file. To generate release signature, this jks file would be required. Run the following command on your terminal:
+
     `keytool -list -v -keystore <your .jks file path> -alias <your jks file alias name>`
+
     Now you will get the MD5 and SHA256 signatures.
 
 4. After adding an API key, you will get your android amazon API key there. Copy it.
 
 ### B. Add amazon authentication API key in a txt file for your android app
   a. Create an `assets` folder inside `main` folder:
+
     `rn-app-root-folder -> android -> app -> src -> main`
 
   b. Create a txt file with name `api_key.txt` inside:
+
     `rn-app-root-folder -> android -> app -> src -> main -> assets`
   
   c. Paste your android API Key inside file `api_key.txt`
@@ -170,7 +176,6 @@ import {
 } from 'react-native';
 
 const eventEmitter = new NativeEventEmitter(LoginWithAmazon);
-
 ```
 Add Listener in your constructor() or componentDidMount() method if you are using Component class OR if you are using hook then add the following code in useEffect() method:
 
@@ -180,14 +185,12 @@ this.eventListener = eventEmitter.addListener('AmazonAuthEvent', (params) => {
     //  Navigate to home screen
   }
 });
-
 ```
 
 Remove Listener in your componentWillUnmount() method if you are using Component class OR if your are using hook then return the following code from useEffect() method:
 
 ```
 this.eventListener.remove(); 
-
 ```
 
 1. For login:

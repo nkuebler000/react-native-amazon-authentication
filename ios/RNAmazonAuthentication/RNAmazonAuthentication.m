@@ -117,7 +117,7 @@ RCT_EXPORT_METHOD(fetchUserData:(RCTResponseSenderBlock)callback)
 RCT_EXPORT_METHOD(logout:(RCTResponseSenderBlock)callback)
 {
     [self logoutAmazon:callback];
-    [self logoutAmazon:callback];
+    //[self logoutAmazon:callback];
 }
 
 - (void)logoutAmazon:(RCTResponseSenderBlock)callback {

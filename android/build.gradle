@@ -14,9 +14,11 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
 }
 
 dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation files('libs/login-with-amazon-sdk.jar')
 }

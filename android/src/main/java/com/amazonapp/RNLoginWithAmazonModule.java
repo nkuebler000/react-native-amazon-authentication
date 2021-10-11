@@ -1,23 +1,27 @@
 package com.amazonapp;
 
-import androidx.annotation.Nullable;
-
+import com.amazon.identity.auth.device.AuthError;
+import com.amazon.identity.auth.device.api.Listener;
+import com.amazon.identity.auth.device.api.authorization.AuthCancellation;
+import com.amazon.identity.auth.device.api.authorization.AuthorizationManager;
+import com.amazon.identity.auth.device.api.authorization.AuthorizeListener;
+import com.amazon.identity.auth.device.api.authorization.AuthorizeRequest;
+import com.amazon.identity.auth.device.api.authorization.AuthorizeResult;
+import com.amazon.identity.auth.device.api.authorization.ProfileScope;
+import com.amazon.identity.auth.device.api.authorization.Scope;
+import com.amazon.identity.auth.device.api.authorization.User;
+import com.amazon.identity.auth.device.api.workflow.RequestContext;
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
-import com.amazon.identity.auth.device.api.workflow.RequestContext;
-import com.amazon.identity.auth.device.api.authorization.*;
-import com.amazon.identity.auth.device.api.Listener;
-import com.amazon.identity.auth.device.AuthError;
-import com.amazon.identity.auth.device.api.authorization.AuthorizationManager;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.Arguments;
+
+import androidx.annotation.Nullable;
 
 public class RNLoginWithAmazonModule extends ReactContextBaseJavaModule implements LifecycleEventListener {
 
